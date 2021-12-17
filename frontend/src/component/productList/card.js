@@ -1,33 +1,33 @@
 import React from "react";
-import { CardHeader, CardHeading } from "../../styled";
+import { CardHeader, CardHeading ,CardText} from "../../styled";
 import moment from 'moment';
 
 const Card = (props) => {
  const {item, isCart, hadleAddItem, hadleSubItem, hadleDelete } = props;
- 
+
 	return (<>
-			<div className="col" >
-				<CardHeader style={{ height: "50px" }}>
+			<div >
+				<CardHeader style={{  }}>
 					<CardHeading>{item.name}</CardHeading>
 				</CardHeader>
 				<img src={item.image} alt={item.name} />
 				<div>
-					<CardHeading className="mt-5">Price : {`฿${item.price}`}</CardHeading>
-					<CardHeading> material : {item.material}</CardHeading>
-					<CardHeading> created date : {moment(item.createdAt).format("DD-MM-YYYY")}</CardHeading>
-					<CardHeading> Stock : {item.stock}</CardHeading>
-					{isCart && <CardHeading>Added: {item.added}</CardHeading>}
-					{   !isCart && <button className="addtocart"
+					<CardText className="mt-4">Price : {`฿${item.price}`}</CardText>
+					<CardText> material : {item.material}</CardText>
+					<CardText> created date : {moment(item.createdAt).format("DD-MM-YYYY")}</CardText>
+					<CardText> Stock : {item.stock}</CardText>
+					{isCart && <CardText>Added: {item.added}</CardText>}
+					{   !isCart && <button className="addtocart text-right"
 									onClick={() => props.handleClick(item)
 									}
-							>Add To Cart  <span style={{ color: "green", width: "50px" }} className="glyphicon glyphicon-shopping-cart"> </span></button>
+							>Add To Cart  <span style={{ color: "green", width: "40px" }} className="glyphicon glyphicon-shopping-cart"> </span></button>
 					}
-					{   isCart && <><button className="addtocart"
+					{   isCart && <><br></br><button className="addtocart"
 									onClick={() => hadleAddItem(item)}
-							>Add</button>
+							>+</button>
 							<button className="addtocart"
 									onClick={() => hadleSubItem(item)}
-							>Sub</button>
+							>-</button>
 							<button className="addtocart"
 									onClick={() => hadleDelete(item)}
 							>Remove</button>

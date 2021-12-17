@@ -1,19 +1,25 @@
 import React from "react";
 import Card from "../productList/card";
-import {CardStyle} from "../../styled"
+import { CartStyle } from "../../styled"
 
 const Cart = ({ cartList, hadleAddItem, hadleSubItem, hadleDelete }) => {
-	return (
-		<>
-			{cartList && cartList.map(item => {
-				return <>
-					<CardStyle className="col">
-						<Card item={item}  isCart hadleSubItem={hadleSubItem} hadleAddItem={hadleAddItem} hadleDelete={hadleDelete}/>
-					</CardStyle>
-				</>
-			})}
-		</>
-	)
+    return (
+        <>
+            <div className="row">
+                {cartList && cartList.map(item => {
+                    return <>
+                        <div className="col-md-6">
+                            <CartStyle >
+                                <Card item={item} isCart hadleSubItem={hadleSubItem} hadleAddItem={hadleAddItem} hadleDelete={hadleDelete} />
+                            </CartStyle>
+                        </div>
+
+                    </>
+                })}
+            </div>
+
+        </>
+    )
 }
 
 export default Cart

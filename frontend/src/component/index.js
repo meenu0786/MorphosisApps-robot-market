@@ -10,7 +10,8 @@ import swal from 'sweetalert';
 function Component() {
 	const [robotList, setrobotList] = useState([]);
 	const [cartList, setCartList] = useState([])
-	const [data,setData] = useState([])
+	const [data, setData] = useState([])
+	const [isOpen, setIsOpen] = useState(false)
 
 	useEffect(() => {
 		axios.get("http://localhost:8000/api/robots")
@@ -83,22 +84,25 @@ function Component() {
 	return (
 		<div>
 			<div>
-				<Header />
+				<Header setIsOpen={setIsOpen} isOpen={isOpen} />
 			</div>
 
-			<div style={{ display: "flex" }}>
+			<div className="top-head">
 				<Product>
 					<div className="container">
 						<Heading>
-							Search	<Filter type="text" placeholder="Search" onChange={searchbyName} />
+							<Filter type="text" placeholder="Search" onChange={searchbyName} />
 						</Heading>
+
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
 				</Product>
-				<div style={{ backgroundColor: "light grey", width: "500px", marginTop: "140px" }}>
-					<Cart cartList={cartList} hadleAddItem={hadleAddItem} hadleSubItem={hadleSubItem} hadleDelete={hadleDelete}/>
-					{ cartList.length > 0 && <h3 style={{paddingLeft: "20px"}}>Total cart Price: {`฿${getCartTotal()}`}</h3>}
-				</div>
+				{isOpen &&
+					<div style={{ backgroundColor: "light grey", width: "610px", marginTop: "70px", maxHeight: "750px", overflow: "scroll" }}>
+						<Cart cartList={cartList} />
+					</div>
+				}
+
 			</div>
 		</div>
 	);
