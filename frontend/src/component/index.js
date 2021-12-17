@@ -9,21 +9,36 @@ import Cart from './cart';
 function Component() {
 	const [robotList, setrobotList] = useState([]);
 	const [cartList, setCartList] = useState([])
+	const [data,setData] = useState([])
 
 	useEffect(() => {
 		axios.get("http://localhost:8000/api/robots")
 			.then((response) => {
-				if(response?.data?.data){
+				if (response?.data?.data) {
 					setrobotList(response.data.data)
+					setData(response.data.data)
 				}
-				
 			}
 			);
 
 	}, []);
 
-	const handleChange = (e)=>{
-		console.log(e.target.value)
+	function searchbyName(event) {
+		let temp = []
+		if (event.target.value === "") {
+			setrobotList(data)
+		}
+		else {
+			robotList.map((value) => {
+				if (value.name) {
+					if (value.name.indexOf(event.target.value) > -1) {
+						temp.push(value)
+					}
+				}
+			})
+			setrobotList(temp)
+		}
+
 	}
 
 	return (
@@ -38,13 +53,13 @@ function Component() {
 				<Product>
 					<div className="container">
 						<Heading>
-							Search	<Filter type="text" placeholder="Search" onChange={handleChange}/>
+							Search	<Filter type="text" placeholder="Search" onChange={searchbyName} />
 						</Heading>
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
 				</Product>
 
-				<div style={{ backgroundColor: "light grey", width: "500px", marginTop: "70px" }}>
+				<div style={{ backgroundColor: "light grey", width: "500px", marginTop: "140px" }}>
 					<Cart cartList={cartList} />
 				</div>
 

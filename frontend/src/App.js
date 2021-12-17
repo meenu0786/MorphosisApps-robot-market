@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Component from './component';
 
-
 function App() {
   return (
     <div className="App">

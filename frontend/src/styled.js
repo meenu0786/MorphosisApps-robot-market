@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Product = styled.div`
-padding: 0.5rem 0;
+  padding: 0.5rem 0;
   margin: 5rem 5rem;
 `
 export const CardHeader = styled.header`
