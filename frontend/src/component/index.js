@@ -6,7 +6,7 @@ import ProductList from './productList';
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Cart from './cart';
 import swal from 'sweetalert';
-// node_modules/bootstrap/dist/css/bootstrap.min.css
+
 function Component() {
 	const [robotList, setrobotList] = useState([]);
 	const [cartList, setCartList] = useState([])
@@ -72,7 +72,13 @@ function Component() {
 		setCartList([...temp]);
 	}
 
-
+	const getCartTotal = () => {
+		let amount = 0;
+		cartList && cartList.map(item => {
+			amount = amount + (item.price * item.added);
+		});
+		return amount;
+	}
 
 	return (
 		<div>
@@ -81,8 +87,6 @@ function Component() {
 			</div>
 
 			<div style={{ display: "flex" }}>
-
-
 				<Product>
 					<div className="container">
 						<Heading>
@@ -91,14 +95,11 @@ function Component() {
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
 				</Product>
-
 				<div style={{ backgroundColor: "light grey", width: "500px", marginTop: "140px" }}>
 					<Cart cartList={cartList} hadleAddItem={hadleAddItem} hadleSubItem={hadleSubItem} hadleDelete={hadleDelete}/>
+					{ cartList.length > 0 && <h3 style={{paddingLeft: "20px"}}>Total cart Price: {`฿${getCartTotal()}`}</h3>}
 				</div>
-
 			</div>
-
-
 		</div>
 	);
 }
