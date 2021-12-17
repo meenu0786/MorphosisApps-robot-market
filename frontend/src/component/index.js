@@ -56,11 +56,11 @@ function Component() {
 			</div>
 			<div style={{ display: "flex" }}>
 				<Product>
-					<div className="container">
+					<div className="container" style={{ marginTop: "15px" }}>
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
 				</Product>
-				<div style={{ backgroundColor: "light grey", width: "500px", marginTop: "70px" }}>
+				<div style={{ backgroundColor: "", width: "500px", marginTop: "70px", paddingLeft: "70px"}}>
 					<Cart cartList={cartList} hadleAddItem={hadleAddItem} hadleSubItem={hadleSubItem} hadleDelete={hadleDelete}/>
 				</div>
 			</div>
