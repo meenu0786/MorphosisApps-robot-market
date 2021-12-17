@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './header';
-import { Product } from "../styled";
+import { Product, Filter, Heading } from "../styled";
 import ProductList from './productList';
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Cart from './cart';
@@ -9,29 +9,37 @@ import Cart from './cart';
 function Component() {
 	const [robotList, setrobotList] = useState([]);
 	const [cartList, setCartList] = useState([])
+
 	useEffect(() => {
 		axios.get("http://localhost:8000/api/robots")
 			.then((response) => {
-				setrobotList(response.data)
+				if(response?.data?.data){
+					setrobotList(response.data.data)
+				}
+				
 			}
 			);
 
 	}, []);
 
-	const renderCard = () => cartList.map((item) => {
-		return <>{item.name}</>
-	})
+	const handleChange = (e)=>{
+		console.log(e.target.value)
+	}
 
 	return (
 		<div>
 			<div>
 				<Header />
 			</div>
+
 			<div style={{ display: "flex" }}>
 
 
 				<Product>
 					<div className="container">
+						<Heading>
+							Search	<Filter type="text" placeholder="Search" onChange={handleChange}/>
+						</Heading>
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
 				</Product>
