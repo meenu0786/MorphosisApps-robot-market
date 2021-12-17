@@ -5,6 +5,7 @@ import { Product } from "../styled";
 import ProductList from './productList';
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Cart from './cart';
+import swal from 'sweetalert';
 // node_modules/bootstrap/dist/css/bootstrap.min.css
 
 function Component() {
@@ -23,9 +24,9 @@ function Component() {
 		let item = temp.find((d) => d.name === data.name);
 		temp = temp.filter((d) => d.name !== data.name);
 		if (item.added === 1 && num === -1) {
-			alert("atleast 1 item required");
+			swal("atleast 1 item required");
 		} else if (item.added === item.stock && num === 1) {
-			alert("Out of stock");
+			swal("Out of stock");
 		} else {
 			let count = item.added + num;
 			item = {...item, added: count };
