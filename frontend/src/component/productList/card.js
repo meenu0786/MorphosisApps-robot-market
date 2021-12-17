@@ -20,7 +20,9 @@ const Card = (props) => {
 					{   !isCart && <button className="addtocart text-right"
 									onClick={() => props.handleClick(item)
 									}
-							>Add To Cart  <span style={{ color: "green", width: "40px" }} className="glyphicon glyphicon-shopping-cart"> </span></button>
+							>Add To Cart  
+                            <span style={{ color: "green", width: "40px" }} className="glyphicon glyphicon-shopping-cart"> </span>
+                            </button>
 					}
 					{   isCart && <><br></br><button className="addtocart"
 									onClick={() => hadleAddItem(item)}

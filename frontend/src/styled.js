@@ -54,4 +54,5 @@ height:350px;
 box-shadow: 3px 3px 3px black;
 border:1px solid black;
 margin:10px;
+width:80%
 `

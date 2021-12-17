@@ -43,6 +43,18 @@ border-radius: 7px;
   margin: 5rem 2rem;
 }
 
+/* style={{ backgroundColor: "light grey", width: "610px", marginTop: "70px", maxHeight: "750px", overflow: "scroll"  */
+
+.cartSection{
+  background-color: rgb(177, 177, 168);
+  width: 610px;
+  height: 700px;
+  margin-top: 70px;
+  max-width: 750px;
+  overflow-y:scroll ;
+  border-radius: 20px;
+}
+
 @media (max-width: 991px) {
   .kGKCrv {
     padding: 10px 0;

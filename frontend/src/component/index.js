@@ -12,18 +12,29 @@ function Component() {
 	const [cartList, setCartList] = useState([])
 	const [data, setData] = useState([])
 	const [isOpen, setIsOpen] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
+		debugger
 		axios.get("http://localhost:8000/api/robots")
 			.then((response) => {
 				if (response?.data?.data) {
 					setrobotList(response.data.data)
 					setData(response.data.data)
+					setLoading(false)
 				}
 			}
-			);
-
+			).catch(err => {
+				swal("Somthing went wrong!!")
+				setLoading(false)
+			})
 	}, []);
+
+	useEffect(() => {
+		if (cartList.length < 1) {
+			setIsOpen(false)
+		}
+	}, [cartList])
 
 	function searchbyName(event) {
 		let temp = []
@@ -43,7 +54,7 @@ function Component() {
 
 	}
 
-	const handleCount = (data , num) => {
+	const handleCount = (data, num) => {
 		let temp = cartList;
 		let item = temp.find((d) => d.name === data.name);
 		temp = temp.filter((d) => d.name !== data.name);
@@ -53,10 +64,10 @@ function Component() {
 			swal("Out of stock");
 		} else {
 			let count = item.added + num;
-			item = {...item, added: count };
+			item = { ...item, added: count };
 			setCartList([...temp, item]);
 		}
-		
+
 	}
 
 	const hadleAddItem = (data) => {
@@ -84,11 +95,11 @@ function Component() {
 	return (
 		<div>
 			<div>
-				<Header setIsOpen={setIsOpen} isOpen={isOpen} />
+				<Header setIsOpen={setIsOpen} isOpen={isOpen} cartList={cartList} />
 			</div>
 
 			<div className="top-head">
-				<Product>
+				{!loading ? <Product>
 					<div className="container">
 						<Heading>
 							<Filter type="text" placeholder="Search" onChange={searchbyName} />
@@ -96,10 +107,21 @@ function Component() {
 
 						<ProductList robotList={robotList} cartList={cartList} setCartList={setCartList} />
 					</div>
-				</Product>
-				{isOpen &&
-					<div style={{ backgroundColor: "light grey", width: "610px", marginTop: "70px", maxHeight: "750px", overflow: "scroll" }}>
-						<Cart cartList={cartList} />
+				</Product> :
+					<div class="spinner-border" role="status" style={{marginTop:"100px"}}>
+						<span class="sr-only">Loading...</span>
+					</div>}
+				{isOpen && cartList.length > 0 &&
+
+					<div className="cartSection">
+						<button type="button" class="btn-close" aria-label="Close"  onClick={() => {
+							setIsOpen(false)
+						}} style={{ position: "absolute", right: "40px" ,color:"white"}}></button>
+						<Cart cartList={cartList} hadleAddItem={hadleAddItem} hadleSubItem={hadleSubItem} hadleDelete={hadleDelete} getCartTotal={getCartTotal} />
+						<hr />
+						<div style={{ textAlign: "center" }}>
+							{cartList.length > 0 && <h3>Total cart Price: {`฿${getCartTotal()}`}</h3>}
+						</div>
 					</div>
 				}
 
