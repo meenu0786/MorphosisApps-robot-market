@@ -3,26 +3,36 @@ import Card from "./card"
 import { CardStyle } from "../../styled";
 
 const ProductList = ({ robotList, cartList, setCartList }) => {
-    const handleClick = (item) => {
-        let temp=cartList
-        temp.push(item)
-        setCartList(temp)
+	const handleClick = (item) => {
+		item = {...item, added: 1};
+		if (cartList.length < 5) {
+			let temp = cartList;
+			let isItemPresent = temp.filter((d) => d.name === item.name);
+			if (isItemPresent.length > 0) {
+				alert("item is already present");
+			} else {
+				temp.push(item)
+				setCartList([...temp]);
+			}
 
-        console.log("cartList",cartList)
-    }
-    return (
-        <div className="row">
-            {
-                robotList?.data?.length && robotList.data.map((item) => {
-                    return (
-                        <CardStyle className="col">
-                            <Card item={item}  handleClick={(item)=>handleClick(item)}/>
-                        </CardStyle>
-                    )
-                })
-            }
-        </div>
-    )
+			console.log("cartList",cartList);
+		} else {
+			alert("not allowed to add more than 5 robot's");
+		}
+	}
+	return (
+		<div className="row">
+			{
+				robotList?.data?.length && robotList.data.map((item) => {
+					return (
+						<CardStyle className="col">
+							<Card item={item}  handleClick={(item)=>handleClick(item)}/>
+						</CardStyle>
+					)
+				})
+			}
+		</div>
+	)
 }
 
 export default ProductList
