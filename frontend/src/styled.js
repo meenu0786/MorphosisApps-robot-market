@@ -23,7 +23,7 @@ export const Heading =styled.div`
 `
 
 export const CardStyle = styled.button`
-height:350px;
+height:375px;
 box-shadow: 3px 3px 3px black;
 border:1px solid black;
 margin:10px;
