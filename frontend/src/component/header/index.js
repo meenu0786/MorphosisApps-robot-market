@@ -5,7 +5,7 @@ export default function Header() {
   const displayDesktop = () => {
     return <Toolbar>
 			<img src="img_avatar.png" alt="Avatar" className="avatar" />
-			MorphosisApps/robot-market
+			<p className="title">MorphosisApps/robot-market</p>
 		</Toolbar>;
   };
   

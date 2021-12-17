@@ -11,12 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.title{
+  font-size: 20px;   
+}
 
 .avatar {
   vertical-align: middle;
   width: 50px;
   height: 50px;
+  font-size: 15px;   
   border-radius: 50%;
   position: absolute;
   right: 40px;
+
 }
+
+.addtocart{
+  color: green;  
+font-size: 15px;   
+text-align: center;
+background-color: rgb(53, 51, 51);
+color:white;
+border-radius: 7px;
+
+}
+
